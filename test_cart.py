@@ -1,3 +1,4 @@
+from unittest import result
 import requests
 from allure_commons._allure import step
 from allure_commons.types import AttachmentType
@@ -5,14 +6,20 @@ from selene import browser
 from selene.support.conditions import have
 import allure
 
+from pages.cart_page import add_product_api
+
 LOGIN = "Bond@example.com"
 PASSWORD = "123456789"
 WEB_URL = "https://demowebshop.tricentis.com/"
 API_URL = "https://demowebshop.tricentis.com/"
 
+ID_PRODUCT_1 = '74/1'
+NAME_1 = 'Build your own expensive computer'
 
-def test_login_though_api():
-    """Successful authorization to some demowebshop (API)"""
+
+
+
+def test_login_api():
     with step("Login with API"):
         result = requests.post(
             url=API_URL + "/login",
@@ -31,3 +38,16 @@ def test_login_though_api():
 
     with step("Verify successful authorization"):
         browser.element(".account").should(have.text(LOGIN))
+
+
+@allure.story('Добавление и проверка товара в корзине')
+def test_add_product():
+    add_product_api.add_product(ID_PRODUCT_1).open_cart().check_add_product(NAME_1)
+
+@allure.story('Добавление и проверка товара в корзине')
+def test_add_product():
+    add_product_api.add_product(ID_PRODUCT_1).open_cart().check_add_product(NAME_1)
+
+
+
+
