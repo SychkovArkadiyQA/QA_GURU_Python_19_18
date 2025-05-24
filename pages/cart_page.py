@@ -1,5 +1,6 @@
 import allure
 from selene import browser, have
+from allure_commons.types import AttachmentType
 import requests
 
 
@@ -10,6 +11,8 @@ class AddProduct:
         url = 'https://demowebshop.tricentis.com/addproducttocart/details/'
         with allure.step('Отправка запроса с указанным id товара'):
             response = requests.post(url + id_product)
+        allure.attach(body=response.text, name="Response", attachment_type=AttachmentType.TEXT, extension="txt")
+        allure.attach(body=str(response.cookies), name="Cookies", attachment_type=AttachmentType.TEXT, extension="txt")
         with allure.step('Проверка кода'):
             assert response.status_code == 200
         with allure.step('Получение cookie'):

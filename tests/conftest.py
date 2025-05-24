@@ -1,6 +1,5 @@
 import pytest
 from selene import browser
-#from demowebshop_test.utils import attach
 
 
 @pytest.fixture(scope="function", autouse=True)
@@ -11,8 +10,4 @@ def browser_setting():
 
     yield browser
 
-  #  attach.add_html(browser)
-   # attach.add_screenshot(browser)
-    #attach.add_logs(browser)
-
-    #browser.quit()
+    browser.quit()
