@@ -5,3 +5,4 @@ API_URL = "https://demowebshop.tricentis.com/"
 
 ID_PRODUCT_1 = '74/1'
 NAME_1 = 'Build your own expensive computer'
+PRICE = '1815.00'

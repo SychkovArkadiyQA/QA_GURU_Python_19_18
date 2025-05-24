@@ -35,5 +35,16 @@ class AddProduct:
 
         return self
 
+    @allure.story('Проверка количества товаров в корзине')
+    def check_qty_product(self, quantity):
+        with allure.step('Проверка количества товара'):
+            from selene import have
+            browser.element('.qty-input').should(have.value(quantity))
+
+        return self
+
+    @allure.step('Проверка цены товара')
+    def check_price_of_good(self, price):
+        browser.element('.product-unit-price').should(have.exact_text(price))
 
 add_product_api = AddProduct()
